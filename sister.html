@@ -6,7 +6,7 @@
     <title>З 8 Березня! 💐</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Фон з анімацією градієнта */
+        /* Фон */
         body {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(-45deg, #ff758c, #ff7eb3, #ff9a9e, #fad0c4);
@@ -20,6 +20,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        /* Приховати зайві елементи */
+        h1:first-child {
+            display: none; /* Ховаємо перший заголовок */
         }
 
         /* Блок привітання */
@@ -38,12 +43,16 @@
             font-size: 32px;
             font-family: 'Dancing Script', cursive;
             text-shadow: 2px 2px 10px rgba(255, 105, 135, 0.8);
-            animation: bounce 1s infinite alternate;
         }
 
         p {
             font-size: 18px;
             color: #444;
+        }
+
+        /* Приховати зайвий текст */
+        p:last-child {
+            display: none;
         }
 
         /* Кнопка */
@@ -62,40 +71,6 @@
         .btn:hover {
             background: #d12c58;
             transform: scale(1.1);
-        }
-
-        /* Анімація градієнта */
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Анімація тексту */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes bounce {
-            from { transform: scale(1); }
-            to { transform: scale(1.05); }
-        }
-
-        /* Падаючі пелюстки */
-        .petal {
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            background: pink;
-            border-radius: 50%;
-            opacity: 0.7;
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); }
-            100% { transform: translateY(110vh) rotate(360deg); }
         }
 
     </style>
@@ -123,22 +98,6 @@
                 audio.pause();
             }
         }
-
-        // Додавання пелюсток
-        function createPetal() {
-            const petal = document.createElement("div");
-            petal.classList.add("petal");
-            document.body.appendChild(petal);
-
-            petal.style.left = Math.random() * 100 + "vw";
-            petal.style.animationDuration = Math.random() * 5 + 5 + "s";
-
-            setTimeout(() => {
-                petal.remove();
-            }, 10000);
-        }
-
-        setInterval(createPetal, 500);
     </script>
 
 </body>
