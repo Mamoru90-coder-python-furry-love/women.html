@@ -1,0 +1,405 @@
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>З 8 Березня! 💐</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #ff758c, #ff7eb3, #ff9a9e, #fad0c4);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
+            text-align: center;
+            color: white;
+            margin: 0;
+            min-height: 100vh;
+        }
+        .main-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 40px 0 80px 0;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            max-width: 450px;
+            color: black;
+            animation: fadeIn 2s ease-in-out;
+            position: relative;
+            margin: 40px auto;
+        }
+        h1 {
+            color: #ff4f72;
+            font-size: 32px;
+            font-family: 'Dancing Script', cursive;
+            text-shadow: 2px 2px 10px rgba(255, 105, 135, 0.8);
+            animation: bounce 1s infinite alternate;
+        }
+        p {
+            font-size: 18px;
+            color: #444;
+        }
+        .btn {
+            background: #ff4f72;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+            box-shadow: 0 5px 10px rgba(255, 79, 114, 0.5);
+            margin: 2px;
+        }
+        .btn:hover {
+            background: #d12c58;
+            transform: scale(1.1);
+        }
+        .fade-in { animation: fadeIn 1s; }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounce {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+        .petal {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background: pink;
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: fall linear infinite;
+            z-index: 1;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(110vh) rotate(360deg); }
+        }
+        .theme-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+        @media (max-width:600px) {
+            .card { max-width: 98vw; padding: 10px; }
+            #galleryImg { width: 100%; }
+            .btn { font-size: 16px; padding: 8px 12px; }
+        }
+        /* Cute mode */
+        .cute-mode { box-shadow: 0 0 40px 10px #ffb6c1, 0 10px 20px rgba(0,0,0,0.2) !important; border: 3px dashed #ffb6c1; }
+        .cute-emoji { font-size: 32px; margin: 0 2px; }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="theme-toggle">
+            <button class="btn" onclick="toggleTheme()" title="Змінити тему">🌗</button>
+        </div>
+        <div class="card" id="card">
+            <div style="margin-bottom:10px;">
+                <button class="btn" onclick="setLang('ua')" title="Українська">UA</button>
+                <button class="btn" onclick="setLang('en')" title="English">EN</button>
+                <button class="btn" onclick="setLang('ru')" title="Русский">RU</button>
+                <button class="btn" onclick="toggleCute()" title="Cute Mode">🐰</button>
+            </div>
+            <h1 id="greeting">З 8 Березня, Дівчата! 💐</h1>
+            <p id="wish" class="fade-in">Нехай цей день буде наповнений радістю, ніжністю та посмішками!<br> 
+               Бажаю вам море щастя, весняного тепла і здійснення мрій! 💖</p>
+            <input type="text" id="nameInput" placeholder="Введіть ім'я" style="margin:10px 0; padding:8px; border-radius:6px; border:1px solid #ff4f72;">
+            <button class="btn" onclick="personalize()" title="Персоналізувати">👩‍🎤</button>
+            <button class="btn" onclick="randomWish()" title="Випадкове побажання">✨</button>
+            <button class="btn" onclick="randomPoem()" title="Випадковий вірш">📜</button>
+            <button class="btn" onclick="playMusic()" title="Музика">🎶</button>
+            <button class="btn" onclick="nextTrack()" title="Наступний трек">⏭️</button>
+            <button class="btn" onclick="takeScreenshot()" title="Скріншот">📸</button>
+            <button class="btn" onclick="shareCard()" title="Поділитися">🔗</button>
+            <div style="margin:10px 0;">
+                <textarea id="customWish" placeholder="Ваше побажання..." style="width:90%;border-radius:6px;padding:6px;"></textarea>
+                <button class="btn" onclick="addCustomWish()" title="Додати побажання">➕</button>
+            </div>
+            <div id="timer" style="margin:15px 0; font-size:18px; color:#ff4f72;"></div>
+            <div id="score" style="font-size:18px; color:#ff4f72; margin-bottom:10px;"></div>
+            <div id="gallery" style="margin-top:20px;">
+                <img id="galleryImg" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Листівка" style="width:100%;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.08);margin-bottom:8px;">
+                <br>
+                <button class="btn" onclick="nextImage()" title="Наступна листівка">🖼️</button>
+                <input type="file" id="uploadImg" accept="image/*" style="display:none" onchange="uploadImage(event)">
+                <button class="btn" onclick="document.getElementById('uploadImg').click()" title="Завантажити свою листівку">⬆️</button>
+            </div>
+        </div>
+        <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="btn" style="position:fixed;right:20px;bottom:20px;z-index:999;">⬆️</button>
+    </div>
+    <audio id="bgMusic" loop>
+        <source id="musicSource" src="https://www.bensound.com/bensound-music/bensound-littleidea.mp3" type="audio/mpeg">
+        Ваш браузер не підтримує аудіо.
+    </audio>
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script>
+        // Мови
+        const texts = {
+            ua: {
+                greeting: "З 8 Березня, Дівчата! 💐",
+                wish: "Нехай цей день буде наповнений радістю, ніжністю та посмішками!<br>Бажаю вам море щастя, весняного тепла і здійснення мрій! 💖",
+                wishes: [
+                    "Бажаю весняного натхнення та щасливих моментів!",
+                    "Нехай здійснюються всі мрії та бажання!",
+                    "Здоров'я, любові та гармонії у серці!",
+                    "Нехай кожен день дарує посмішку!",
+                    "Щастя, радості та тепла у душі!",
+                    "Нехай у серці завжди буде весна!",
+                    "Більше сонця, радості та любові!",
+                    "Нехай здійснюються найзаповітніші мрії!"
+                ],
+                poems: [
+                    "Весна іде, весна іде,<br>І всім нам радість несе!<br>З 8 Березня!",
+                    "Нехай любов цвіте, мов сад,<br>І щастя буде завжди поряд!",
+                    "Нехай у серці буде світло,<br>А в душі — весна розквітла!",
+                    "Зі святом, з весною, з жіночим днем!<br>Нехай здійснюється все, про що мрієш ти!"
+                ]
+            },
+            en: {
+                greeting: "Happy Women's Day! 💐",
+                wish: "May your day be filled with joy, tenderness and smiles!<br>Wishing you happiness, spring warmth and dreams come true! 💖",
+                wishes: [
+                    "Wishing you spring inspiration and happy moments!",
+                    "May all your dreams and wishes come true!",
+                    "Health, love and harmony in your heart!",
+                    "May every day bring you a smile!",
+                    "Happiness, joy and warmth in your soul!",
+                    "May there always be spring in your heart!",
+                    "More sun, joy and love!",
+                    "May your dearest dreams come true!"
+                ],
+                poems: [
+                    "Spring is coming, bringing joy to all!<br>Happy Women's Day!",
+                    "Let love bloom like a garden,<br>And happiness always be near!",
+                    "Let there be light in your heart,<br>And spring blossom in your soul!",
+                    "With the holiday, with spring, with Women's Day!<br>May all your dreams come true!"
+                ]
+            },
+            ru: {
+                greeting: "С 8 Марта, Девушки! 💐",
+                wish: "Пусть этот день будет наполнен радостью, нежностью и улыбками!<br>Желаю вам море счастья, весеннего тепла и исполнения мечт! 💖",
+                wishes: [
+                    "Желаю весеннего вдохновения и счастливых моментов!",
+                    "Пусть сбываются все мечты и желания!",
+                    "Здоровья, любви и гармонии в сердце!",
+                    "Пусть каждый день дарит улыбку!",
+                    "Счастья, радости и тепла в душе!",
+                    "Пусть в сердце всегда будет весна!",
+                    "Больше солнца, радости и любви!",
+                    "Пусть сбываются самые заветные мечты!"
+                ],
+                poems: [
+                    "Весна идёт, весна идёт,<br>И всем нам радость несёт!<br>С 8 Марта!",
+                    "Пусть любовь цветёт, как сад,<br>И счастье будет всегда рядом!",
+                    "Пусть в сердце будет светло,<br>А в душе — весна расцвела!",
+                    "С праздником, с весной, с женским днём!<br>Пусть сбывается всё, о чём мечтаешь ты!"
+                ]
+            }
+        };
+        let lang = 'ua';
+        function setLang(l) {
+            lang = l;
+            document.getElementById('greeting').innerHTML = texts[lang].greeting;
+            document.getElementById('wish').innerHTML = texts[lang].wish;
+            showScore();
+        }
+        function randomWish() {
+            const wish = texts[lang].wishes[Math.floor(Math.random() * texts[lang].wishes.length)];
+            const wishEl = document.getElementById('wish');
+            wishEl.classList.remove('fade-in');
+            void wishEl.offsetWidth;
+            wishEl.innerHTML = wish;
+            wishEl.classList.add('fade-in');
+        }
+        function randomPoem() {
+            const wishEl = document.getElementById('wish');
+            wishEl.classList.remove('fade-in');
+            void wishEl.offsetWidth;
+            wishEl.innerHTML = texts[lang].poems[Math.floor(Math.random()*texts[lang].poems.length)];
+            wishEl.classList.add('fade-in');
+        }
+        // Cute Mode
+        let cute = false;
+        function toggleCute() {
+            cute = !cute;
+            document.getElementById('card').classList.toggle('cute-mode', cute);
+            if (cute) {
+                if (!document.getElementById('cuteCat')) {
+                    const cat = document.createElement('span');
+                    cat.id = "cuteCat";
+                    cat.className = "cute-emoji";
+                    cat.textContent = "🐱";
+                    document.getElementById('greeting').appendChild(cat);
+                }
+            } else {
+                const cat = document.getElementById('cuteCat');
+                if (cat) cat.remove();
+            }
+        }
+        // Міні-гра: Лови пелюстку
+        let score = 0;
+        function createPetal() {
+            const shapes = [
+                {bg: "pink", br: "50%"}, // пелюстка
+                {bg: "#ff4f72", br: "50%"}, // сердечко
+                {bg: "linear-gradient(135deg,#ffb347 60%,#ff758c 100%)", br: "40% 60% 60% 40%/60% 40% 60% 40%"}, // метелик
+            ];
+            const s = shapes[Math.floor(Math.random()*shapes.length)];
+            const el = document.createElement("div");
+            el.classList.add("petal");
+            el.style.background = s.bg;
+            el.style.borderRadius = s.br;
+            el.style.width = 15 + Math.random()*15 + "px";
+            el.style.height = 15 + Math.random()*15 + "px";
+            el.style.left = Math.random() * 100 + "vw";
+            el.style.animationDuration = Math.random() * 5 + 5 + "s";
+            el.style.opacity = 0.5 + Math.random()*0.5;
+            el.onclick = function() {
+                score++;
+                el.remove();
+                showScore();
+            };
+            document.body.appendChild(el);
+            setTimeout(()=>el.remove(), 10000);
+        }
+        function showScore() {
+            let el = document.getElementById('score');
+            el.textContent = lang === 'ua' ? `Рахунок: ${score}` : lang === 'en' ? `Score: ${score}` : `Счёт: ${score}`;
+        }
+        setInterval(createPetal, 400);
+
+        // Побажання
+        function sanitize(str) {
+            return str.replace(/[<>&"']/g, function(c) {
+                return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;',"'":'&#39;'}[c];
+            });
+        }
+        function personalize() {
+            const name = document.getElementById('nameInput').value.trim();
+            const greeting = document.getElementById('greeting');
+            if (name) {
+                let base = texts[lang].greeting.split(',')[0];
+                greeting.innerHTML = sanitize(base) + ", " + sanitize(name) + "! 💐";
+            } else {
+                greeting.innerHTML = texts[lang].greeting;
+            }
+        }
+        // Додати власне побажання
+        function addCustomWish() {
+            const val = document.getElementById('customWish').value.trim();
+            if (val) {
+                texts[lang].wishes.push(val);
+                randomWish();
+                document.getElementById('customWish').value = '';
+            }
+        }
+        // Галерея
+        const images = [
+            "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
+            "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80",
+            "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=400&q=80"
+        ];
+        let imgIdx = 0;
+        function nextImage() {
+            imgIdx = (imgIdx+1)%images.length;
+            document.getElementById('galleryImg').src = images[imgIdx];
+        }
+        function uploadImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    images.push(e.target.result);
+                    imgIdx = images.length-1;
+                    document.getElementById('galleryImg').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        // Таймер до весни (1 березня)
+        function updateTimer() {
+            const now = new Date();
+            let nextSpring = new Date(now.getFullYear(), 2, 1, 0, 0, 0);
+            if (now > nextSpring) nextSpring = new Date(now.getFullYear()+1, 2, 1, 0, 0, 0);
+            const diff = nextSpring - now;
+            const days = Math.floor(diff/1000/60/60/24);
+            const hours = Math.floor(diff/1000/60/60)%24;
+            const mins = Math.floor(diff/1000/60)%60;
+            const secs = Math.floor(diff/1000)%60;
+            document.getElementById('timer').textContent = lang === 'ua'
+                ? `До весни: ${days} дн. ${hours} год. ${mins} хв. ${secs} сек.`
+                : lang === 'en'
+                ? `Until spring: ${days}d ${hours}h ${mins}m ${secs}s`
+                : `До весни: ${days} дн. ${hours} ч. ${mins} мин. ${secs} сек.`;
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+        // Музика
+        const tracks = [
+            "https://www.bensound.com/bensound-music/bensound-littleidea.mp3",
+            "https://www.bensound.com/bensound-music/bensound-sunny.mp3",
+            "https://www.bensound.com/bensound-music/bensound-buddy.mp3"
+        ];
+        let currentTrack = 0;
+        function playMusic() {
+            let audio = document.getElementById("bgMusic");
+            if (audio.paused) audio.play();
+            else audio.pause();
+        }
+        function nextTrack() {
+            currentTrack = (currentTrack + 1) % tracks.length;
+            let audio = document.getElementById("bgMusic");
+            document.getElementById("musicSource").src = tracks[currentTrack];
+            audio.load();
+            audio.play();
+        }
+        // Скріншот
+        function takeScreenshot() {
+            html2canvas(document.getElementById('card')).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'greeting.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+        }
+        // Поділитися (Web Share API)
+        function shareCard() {
+            const text = document.getElementById('greeting').textContent + "\n" + document.getElementById('wish').textContent;
+            if (navigator.share) {
+                navigator.share({
+                    title: texts[lang].greeting,
+                    text: text,
+                    url: window.location.href
+                });
+            } else {
+                alert(lang === 'ua'
+                    ? "Ваш браузер не підтримує Web Share API."
+                    : lang === 'en'
+                    ? "Your browser does not support the Web Share API."
+                    : "Ваш браузер не поддерживает Web Share API.");
+            }
+        }
+        // Темна тема (додатково)
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+        }
+    </script>
+</body>
+</html>
